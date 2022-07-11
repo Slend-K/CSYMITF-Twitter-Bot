@@ -15,7 +15,7 @@ auth.set_access_token(api_key, api_key_secret)
 
 api = tweepy.API(auth)
 
-
+"""
 FILE_NAME = "last_seen.txt"
 
 def read_last_seen(FILE_NAME):
@@ -33,7 +33,7 @@ def store_last_seen(FILE_NAME, last_seen_id):
 
 mentions = api.mentions_timeline()
 
-"""
+
 for tweet in reversed(mentions):
   api.create_favorite(tweet.id)
   time.sleep(30)
