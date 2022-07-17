@@ -1,6 +1,8 @@
 import tweepy
 import os
 import time
+import schedule
+import asyncio
 from keep_alive import keep_alive
 from datetime import date
 
@@ -39,13 +41,30 @@ for tweet in reversed(mentions):
   time.sleep(30)
 """
 
-i = 0
 
-if date.today().weekday() == 6:
+def tweet():
+  print("Defining 'i'")
+  i = 0
+  print(f"'i' defined as {i}")
+
   i += 1
-  print("Congratulating those who made it to Friday :D")
-  api.update_status(f"Week {i} of Congratulations Sailor, you made it to Friday!\nhttps://youtu.be/0sqJzq5Rsqk")
+  print(f"'i' redefined as {i}")
+
+  print("Getting the file ready")
+  upload_result = api.media_upload('video.mp4')
+  print("File ready")
+
+
+  print("\nCongratulating those who made it to Friday :D")
+  api.update_status(status=f"Week {i} of Congratulations Sailor, You Made it to Friday!", media_ids=[upload_result.media_id_string])
   print("Congratulated\n")
+
+
+schedule.every().friday.at("08:00").do(tweet)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1800)
 
 
 keep_alive()
