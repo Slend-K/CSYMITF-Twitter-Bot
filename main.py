@@ -1,3 +1,5 @@
+print("Starting... \n\n\n")
+
 import tweepy
 import os
 import time
@@ -64,7 +66,8 @@ schedule.every().friday.at("08:00").do(tweet)
 
 while True:
     schedule.run_pending()
-    time.sleep(1800)
+    print("Gotta keep us alive")
+    time.sleep(60)
 
 
 keep_alive()
